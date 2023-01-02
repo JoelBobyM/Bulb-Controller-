@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIGHT</title>
+    <link rel="stylesheet" href="iot.css">
+</head>
+<body>
+    <div class="light">
+        <div class="wire"></div>
+        <div class="bulb">
+            <span></span>
+            <span></span>
+        </div>
+        <div class="switch">
+            <div class="btn"></div>
+        </div>
+    </div>
+    <script>
+        let btn = document.querySelector('.btn');
+        let body = document.querySelector('body');
+        var b = true;
+        let theUrl = "";
+        btn.onclick = function()
+        {
+            body.classList.toggle('on');
+            if(b)
+            {
+                theUrl="http://192.168.64.210/?LED=ON";
+            }
+            else
+            {
+                theUrl="http://192.168.64.210/?LED=OFF";
+            }
+            b = !b;
+            console.log(theUrl)
+            httpGet(theUrl)
+        }
+        function httpGet(theUrl)
+        {
+            const Http = new XMLHttpRequest();
+            Http.open("GET", theUrl);
+            Http.send();
+        }
+    </script>
+
+</body>
+</html>
